@@ -22,7 +22,7 @@ module Liquidizer
         assigns = assigns_for_liquify
         content = view_template.render!(assigns)
 
-        if layout_template = liquid_template_for_layout(options)
+        if view_template.display_in_layout? && layout_template = liquid_template_for_layout(options)
           content = layout_template.render!(assigns.merge('content_for_layout' => content))
           options[:layout] = false
         end
